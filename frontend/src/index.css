@@ -1,0 +1,196 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 225 14% 1%;
+    --foreground: 0 0% 100%;
+    --card: 225 11% 7%;
+    --card-foreground: 0 0% 100%;
+    --popover: 225 11% 7%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 28 94% 54%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 11% 10%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 217 19% 62%;
+    --muted-foreground: 217 19% 62%;
+    --accent: 225 11% 10%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 28 94% 54%;
+    --radius: 0.5rem;
+
+    /* PowerEye custom tokens */
+    --pe-bg: #030304;
+    --pe-surface: #0F1115;
+    --pe-surface2: #161820;
+    --pe-orange: #F7931A;
+    --pe-orange-d: #EA580C;
+    --pe-gold: #FFD600;
+    --pe-green: #22C55E;
+    --pe-red: #EF4444;
+    --pe-amber: #F59E0B;
+    --pe-border: rgba(255,255,255,0.08);
+    --pe-border-md: rgba(255,255,255,0.14);
+    --pe-glow-sm: 0 0 20px -5px rgba(234,88,12,0.45);
+    --pe-glow-md: 0 0 30px -5px rgba(247,147,26,0.55);
+    --pe-glow-lg: 0 0 50px -10px rgba(247,147,26,0.25);
+
+    --font-head: 'Space Grotesk', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+
+    --sidebar-background: 225 11% 7%;
+    --sidebar-foreground: 217 19% 62%;
+    --sidebar-primary: 28 94% 54%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 11% 10%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 100% / 0.08;
+    --sidebar-ring: 28 94% 54%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    background: var(--pe-bg);
+    color: white;
+    font-family: var(--font-head);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  a { color: inherit; text-decoration: none; }
+}
+
+/* ─── BACKGROUND ELEMENTS ─── */
+.bg-grid {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(30,41,59,0.4) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(30,41,59,0.4) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 30%, black 40%, transparent 100%);
+}
+.bg-orb {
+  position: fixed; border-radius: 50%; pointer-events: none; z-index: 0;
+  filter: blur(100px); opacity: 0.07;
+}
+.bg-orb1 { width: 600px; height: 600px; background: var(--pe-orange); top: -200px; right: -150px; }
+.bg-orb2 { width: 500px; height: 500px; background: var(--pe-gold); bottom: -150px; left: -100px; }
+
+/* ─── GRADIENT TEXT ─── */
+.grad-text {
+  background: linear-gradient(to right, var(--pe-orange), var(--pe-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes blink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+@keyframes pulse-ring {
+  0% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+@keyframes skeleton-shimmer { to { background-position: -200% 0; } }
+
+/* ─── POLE CARD STYLES ─── */
+.pole-card {
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 1rem;
+  align-items: center;
+  transition: all 0.25s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.pole-card::before {
+  content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+}
+.pole-card.status-active::before { background: var(--pe-green); }
+.pole-card.status-warning::before { background: var(--pe-amber); }
+.pole-card.status-fault::before, .pole-card.status-error::before { background: var(--pe-red); }
+.pole-card.status-offline::before { background: #94A3B8; }
+.pole-card:hover { border-color: rgba(247,147,26,0.3); transform: translateX(4px); }
+
+/* ─── MAP TILE ON POLE CARD ─── */
+.pole-map-tile {
+  width: 80px; height: 60px; border-radius: 8px; overflow: hidden;
+  border: 1px solid var(--pe-border);
+  flex-shrink: 0;
+}
+.pole-map-tile .leaflet-container {
+  width: 100%; height: 100%;
+  background: var(--pe-surface2);
+}
+
+/* ─── FORM STYLES (Add Pole Dialog) ─── */
+.pe-form-section {
+  background: var(--pe-surface);
+  border: 1px solid var(--pe-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+}
+.pe-form-section-title {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--pe-orange);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.pe-input {
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.12);
+  border-radius: 0;
+  padding: 10px 14px;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pe-input:focus {
+  border-bottom-color: var(--pe-orange);
+  box-shadow: 0 8px 20px -10px rgba(247,147,26,0.3);
+}
+.pe-input::placeholder { color: rgba(255,255,255,0.22); }
+.pe-select {
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  border: none;
+  border-bottom: 2px solid rgba(255,255,255,0.12);
+  border-radius: 0;
+  padding: 10px 14px;
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  outline: none;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+.pe-select:focus { border-bottom-color: var(--pe-orange); }
+.pe-select option { background: var(--pe-surface); }
+
+/* ─── LEAFLET OVERRIDES ─── */
+.leaflet-control-attribution { display: none !important; }
