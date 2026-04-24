@@ -21,7 +21,7 @@ export default function HomePage() {
       <Navbar />
 
       <div className="relative z-[1] max-w-[1280px] mx-auto px-8 pt-16">
-        <section className="pt-32 pb-20 max-w-[760px]">
+        {/* <section className="pt-32 pb-20 max-w-[760px]">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pe-orange/30 bg-pe-orange/5 font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-pe-orange mb-8">
             <div className="w-[7px] h-[7px] rounded-full bg-pe-orange relative animate-pulse" />
@@ -42,6 +42,79 @@ export default function HomePage() {
             <Link to="/signup" className="px-8 py-3.5 rounded-full bg-gradient-to-r from-pe-orange-d to-pe-orange font-mono text-sm font-semibold tracking-wider uppercase text-white shadow-[var(--pe-glow-sm)] hover:shadow-[var(--pe-glow-md)] hover:scale-[1.04] transition-all">Create Account</Link>
             <Link to="/login" className="font-mono text-sm font-medium tracking-wider text-pe-muted hover:text-pe-orange transition-colors">Sign In to Dashboard →</Link>
           </motion.div>
+        </section> */}
+
+        {/* Hero — two column with prototype */}
+        <section className="pt-32 pb-20">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+
+            {/* Left — text */}
+            <div className="max-w-[600px]">
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }}
+                className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-pe-orange/30 bg-pe-orange/5 font-mono text-[11px] font-semibold tracking-[0.12em] uppercase text-pe-orange mb-8">
+                <div className="w-[7px] h-[7px] rounded-full bg-pe-orange relative animate-pulse" />
+                Live Grid Monitoring Active
+              </motion.div>
+
+              <motion.h1 initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7, delay: 0.1 }}
+                className="text-5xl md:text-6xl font-bold leading-[1.1] mb-6">
+                Monitor Every<br/>
+                <span className="text-pe-orange">Volt.</span>
+                <span className="text-pe-gold"> Every Pole.</span>
+              </motion.h1>
+
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.7, delay: 0.3 }}
+                className="text-lg text-pe-muted leading-relaxed mb-10">
+                PowerEye Monitor gives electricity engineers real-time visibility into pole voltage readings, fault detection, and grid health — all from a single secure dashboard.
+              </motion.p>
+
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex items-center gap-4 flex-wrap">
+                <Link to="/signup" className="px-8 py-3.5 rounded-full bg-gradient-to-r from-pe-orange-d to-pe-orange font-mono text-sm font-semibold tracking-wider uppercase text-white shadow-[var(--pe-glow-sm)] hover:shadow-[var(--pe-glow-md)] hover:scale-[1.04] transition-all">Create Account</Link>
+                <Link to="/login" className="font-mono text-sm font-medium tracking-wider text-pe-muted hover:text-pe-orange transition-colors">Sign In to Dashboard →</Link>
+              </motion.div>
+            </div>
+
+            {/* Right — prototype image */}
+            <motion.div initial={{ opacity: 0, x: 40 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.3 }}
+              className="relative hidden lg:block">
+
+              {/* Corner accent brackets */}
+              <div className="absolute -top-px -left-px w-5 h-5 border-t-2 border-l-2 border-pe-orange/60 rounded-tl-md z-10" />
+              <div className="absolute -top-px -right-px w-5 h-5 border-t-2 border-r-2 border-pe-orange/60 rounded-tr-md z-10" />
+              <div className="absolute -bottom-px -left-px w-5 h-5 border-b-2 border-l-2 border-pe-orange/60 rounded-bl-md z-10" />
+              <div className="absolute -bottom-px -right-px w-5 h-5 border-b-2 border-r-2 border-pe-orange/60 rounded-br-md z-10" />
+
+              <div className="relative rounded-2xl border border-pe-orange/25 overflow-hidden bg-pe-surface">
+
+                {/* The prototype photo */}
+                <img
+                  src="/images/proto-powered.jpeg"
+                  alt="PowerEye prototype installed in pole circuit box"
+                  className="w-full h-[420px] object-cover"
+                />
+
+                {/* Dark gradient overlay at bottom */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+
+                {/* Live badge top-right */}
+                <div className="absolute top-3.5 right-3.5 flex items-center gap-1.5 px-3 py-1 rounded-full bg-black/75 border border-pe-orange/50 font-mono text-[10px] font-bold tracking-widest uppercase text-pe-orange">
+                  <div className="w-[6px] h-[6px] rounded-full bg-pe-orange animate-pulse" />
+                  Prototype Active
+                </div>
+
+                {/* Bottom chips */}
+                <div className="absolute bottom-3.5 left-3.5 flex gap-2">
+                  {[["ESP8266", "Wi-Fi"], ["Voltage", "Live"], ["Relay", "Armed"]].map(([label, val], i) => (
+                    <div key={i} className="px-2.5 py-1.5 rounded-lg bg-black/75 border border-white/10 font-mono text-[11px] text-white/70">
+                      {label} <span className="text-pe-orange font-bold">{val}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+
+          </div>
         </section>
       </div>
 
@@ -71,6 +144,65 @@ export default function HomePage() {
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{f.title}</h3>
                 <p className="text-sm text-pe-muted leading-relaxed">{f.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* Prototype Installation */}
+        <section className="py-24" id="prototype">
+          <div className="font-mono text-[11px] font-semibold tracking-[0.2em] uppercase text-pe-orange mb-3 flex items-center gap-2">
+            <div className="w-[7px] h-[7px] rounded-full bg-pe-orange animate-pulse" />
+            Hardware Prototype
+          </div>
+          <div className="text-4xl font-bold mb-4">Inside the Circuit Box</div>
+          <p className="text-pe-muted text-lg leading-relaxed max-w-[560px] mb-14">
+            The PowerEye sensor unit is a compact, self-contained module installed directly inside the pole's circuit enclosure — measuring voltage in real time and transmitting data over Wi-Fi.
+          </p>
+
+          {/* 3 Images */}
+          <div className="grid md:grid-cols-3 gap-5 mb-16">
+            {[
+              { src: "/images/proto-open.jpeg", badge: "View 01 — Enclosure Open", caption: "Full assembly — NodeMCU ESP8266, Arduino Nano, current sensor, relay, and wiring harness seated in the protective casing." },
+              { src: "/images/proto-powered.jpeg", badge: "View 02 — Powered On", caption: "Prototype energized — red status LEDs confirm live voltage sensing and active Wi-Fi transmission to the cloud dashboard." },
+              { src: "/images/proto-sealed.jpeg", badge: "View 03 — Field-Ready", caption: "Enclosure sealed with external cable entry points — ready for pole-side deployment with live-line connections." },
+            ].map((img, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="bg-pe-surface border border-[var(--pe-border)] rounded-2xl overflow-hidden hover:border-pe-orange/30 hover:shadow-[var(--pe-glow-lg)] transition-all">
+                <div className="relative">
+                  <img src={img.src} alt={img.badge} className="w-full h-64 object-cover" />
+                  <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-sm border border-pe-orange/40 font-mono text-[10px] font-bold tracking-widest uppercase text-pe-orange">
+                    {img.badge}
+                  </div>
+                </div>
+                <p className="text-[13px] text-pe-muted leading-relaxed p-4 border-t border-[var(--pe-border)]">{img.caption}</p>
+              </motion.div>
+            ))}
+          </div>
+
+          {/* Divider */}
+          <div className="h-px bg-gradient-to-r from-transparent via-pe-orange/30 to-transparent mb-14" />
+
+          {/* Installation Steps */}
+          <div className="text-2xl font-bold mb-8">Installation Process</div>
+          <div className="grid md:grid-cols-2 gap-5">
+            {[
+              { n: "01", title: "Mount the Enclosure", desc: "Fix the protective casing inside the pole's circuit box. Ensure clearance from high-voltage lines before proceeding." },
+              { n: "02", title: "Connect the Current Sensor", desc: "Clamp the non-invasive CT sensor around the phase wire — no cutting required. Feeds signal directly to the Arduino Nano." },
+              { n: "03", title: "Wire the Voltage Tap", desc: "Connect the voltage divider leads (red/green wires) to the phase and neutral terminals for live voltage sampling." },
+              { n: "04", title: "Power Up & Pair", desc: "The onboard buck converter steps down supply to 5V. On first boot, the ESP8266 connects to the pole's provisioned Wi-Fi." },
+              { n: "05", title: "Verify Live Transmission", desc: "Red LED indicators confirm sensor activity. Within 10 seconds, telemetry appears on the dashboard — updated every second." },
+              { n: "06", title: "Seal & Sign Off", desc: "Close the enclosure, secure cable glands, and log the pole ID in the dashboard. The unit runs fully autonomously." },
+            ].map((step, i) => (
+              <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+                className="bg-pe-surface border border-[var(--pe-border)] rounded-2xl p-6 flex gap-4 items-start hover:border-pe-orange/25 transition-all">
+                <div className="w-9 h-9 min-w-[36px] rounded-xl bg-pe-orange/10 border border-pe-orange/20 flex items-center justify-center font-mono text-[13px] font-bold text-pe-orange">
+                  {step.n}
+                </div>
+                <div>
+                  <h3 className="text-[15px] font-semibold mb-1.5">{step.title}</h3>
+                  <p className="text-sm text-pe-muted leading-relaxed">{step.desc}</p>
+                </div>
               </motion.div>
             ))}
           </div>
