@@ -73,7 +73,7 @@ This system aims to **detect such anomalies early** and alert authorities to pre
 
 ---
 
-## 👥 Team Members
+## 👥 Team Members - Team name - Bijli Rakshak
 
 * **Robin** – Backend Development
 * **Ashish** – Team Leader & Frontend Development
